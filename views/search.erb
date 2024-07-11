@@ -13,10 +13,12 @@
 
     <ul>
     <% @results.each do |result| %>
-      <li><a href="/chapters/<%= result[:number].to_i %>"><%= result[:name] %></a></li>
+      <li>
+        <h4><%= result[:name] %></h4>
+      </li>
       <ul>
-        <% result[:paragraph].each do |paragraph| %>
-          <li><a href="#"><%= paragraph %></a></li>
+        <% result[:paragraphs].each do |paragraph, bookmark| %>
+          <li><a href="/chapters/<%= result[:number] %>#<%= bookmark %>"><%= paragraph %></a></li>
         <% end %>
       </ul>
     <% end %>
