@@ -18,7 +18,7 @@
       </li>
       <ul>
         <% result[:paragraphs].each do |paragraph, bookmark| %>
-          <li><a href="/chapters/<%= result[:number] %>#<%= bookmark %>"><%= paragraph %></a></li>
+          <li><a href="/chapters/<%= result[:number] %>#<%= bookmark %>"><%= highlight_matching(params[:query], paragraph) %></a></li>
         <% end %>
       </ul>
     <% end %>

@@ -12,6 +12,10 @@ helpers do
       "<div id='#{idx}'><p>#{paragraph}</p></div>"
     end.join
   end
+
+  def highlight_matching(query, text)
+    text.gsub!(query, "<strong>#{query}</strong>")
+  end
 end
 
 def each_chapter
