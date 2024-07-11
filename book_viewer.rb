@@ -8,8 +8,8 @@ end
 
 helpers do
   def in_paragraphs (chapter)
-    chapter.split("\n\n").map.with_index do |paragraph, index|
-      "<div id='<%= index %>'><p>#{paragraph}</p></div>"
+    chapter.split("\n\n").map.with_index do |paragraph, idx|
+      "<div id='#{idx}'><p>#{paragraph}</p></div>"
     end.join
   end
 end
@@ -28,16 +28,22 @@ def chapters_matching(query)
   return results if !query || query.empty?
 
   each_chapter do |number, name, contents|
-    results << { number: number, name: name , paragraph: paragraphs_matching(contents, query)} if contents.include?(query)
+    results << { number: number, name: name , paragraphs: paragraphs_matching(contents, query)} if contents.include?(query)
   end
 
   results
 end
 
 def paragraphs_matching(query_string, query)
-  query_string.split("\n\n").select do |paragraph|
+  paragraphs = query_string.split("\n\n").map.with_index do |paragraph, idx|
+    [paragraph, idx]
+  end
+  
+  paragraphs.select! do |(paragraph, _)|
     paragraph.include?(query)
   end
+  
+  paragraphs
 end
 
 get "/" do
