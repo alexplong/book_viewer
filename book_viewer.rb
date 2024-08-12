@@ -32,7 +32,7 @@ def chapters_matching(query)
   return results if !query || query.empty?
 
   each_chapter do |number, name, contents|
-    results << { number: number, name: name , paragraphs: paragraphs_matching(contents, query)} if contents.include?(query)
+    results << { number: number, name: name , paragraphs: paragraphs_matching(contents, query) } if contents.include?(query)
   end
 
   results
@@ -51,7 +51,7 @@ def paragraphs_matching(query_string, query)
 end
 
 get "/" do
-  @title = "The Adventures of Sherlock Holmeys"
+  @title = "The Adventures of Sherlock Holmes"
   erb :home
 end
 
